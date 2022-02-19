@@ -16,7 +16,12 @@ void	ft_putstr(char *s)
 {
 	unsigned int	index;
 
-	index = 0;
-	while (s[index] != '\0')
-		ft_putchar(s[index++]);
+	if (s)
+	{
+		index = 0;
+		while (s[index] != '\0')
+			ft_putchar(s[index++]);
+	}
+	else
+		ft_putstr("(null)");
 }

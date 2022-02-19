@@ -34,10 +34,7 @@ int	ft_printf(const char *in_str, ...)
 			if (in_str[i] == 's')
 			{
 				s_str = va_arg(arg_ptr, char *);
-				if (s_str)
-					ft_putstr(s_str);
-				else
-					ft_putstr("(null)");
+				ft_putstr(s_str);
 			}
 			else if (in_str[i] == 'c')
 			{
@@ -50,7 +47,7 @@ int	ft_printf(const char *in_str, ...)
 				if (s_num < 0)
 				{
 					ft_putchar('-');
-					ft_putnbr_base(-s_num, 10, "0123456789");
+					ft_putnbr_base((unsigned int)(-s_num), 10, "0123456789");
 				}
 				else
 					ft_putnbr_base(s_num, 10, "0123456789");
@@ -79,7 +76,7 @@ int	ft_printf(const char *in_str, ...)
 					ft_putnbr_base(addr, 16, "0123456789abcdef");
 				}
 				else
-					ft_putstr(NULL);				
+					ft_putstr("(nil)");
 			}
 			else if (in_str[i] == '%')
 				ft_putchar('%');
