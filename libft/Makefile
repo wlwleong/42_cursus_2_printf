@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wlwleong <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/19 19:03:58 by wlwleong          #+#    #+#              #
-#    Updated: 2022/02/20 01:10:12 by wlwleong         ###   ########.fr        #
+#    Created: 2022/02/20 00:21:17 by wlwleong          #+#    #+#              #
+#    Updated: 2022/02/20 00:39:13 by wlwleong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 
 FILES = $(wildcard ft_*.c)
@@ -20,19 +20,17 @@ OBJ = $(FILES:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	@make -C libft
-	@cp libft/libft.a $(NAME)
 	gcc $(CFLAGS) -c $(FILES)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ) libft/*.o a.out
-	echo "clean: Objects cleaned."
+	rm -rf $(OBJ) a.out
+	echo "Libft: clean: Objects cleaned."
 
 fclean: clean
-	rm -rf $(NAME)
-	echo "fclean: Library deleted."
+	rm -f $(NAME)
+	echo "Libft: fclean: Library deleted."
 
 re: fclean all
 

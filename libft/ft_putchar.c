@@ -6,11 +6,11 @@
 /*   By: wlwleong <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:39:01 by wlwleong          #+#    #+#             */
-/*   Updated: 2022/02/19 17:41:22 by wlwleong         ###   ########.fr       */
+/*   Updated: 2022/02/20 00:38:03 by wlwleong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putchar(char c)
 {
