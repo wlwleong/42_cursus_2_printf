@@ -21,17 +21,17 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@cp libft/libft.a $(NAME)
+	@cp ./libft/libft.a $(NAME)
 	gcc $(CFLAGS) -c $(FILES)
-	ar rc $(NAME) $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ) libft/*.o a.out
+	rm -rf $(OBJ) ./libft/*.o a.out
 	echo "clean: Objects cleaned."
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) ./libft/libft.a
 	echo "fclean: Library deleted."
 
 re: fclean all
