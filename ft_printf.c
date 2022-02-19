@@ -12,19 +12,16 @@
 
 #include "ft_printf.h"
 
+static void	ft_printf_num(int format, va_list arg_ptr);
+
 int	ft_printf(const char *in_str, ...)
 {
-	va_list	arg_ptr;
-	int					i;
-	char				*s_str;
-	char				c_char;
-	int					s_num;
-	unsigned int		u_num;
-	unsigned long int	addr;
+	va_list	ap;
+	int		i;
 
-	va_start(arg_ptr, in_str);
-	i = 0;
-	while (in_str[i])
+	va_start(ap, in_str);
+	i = -1;
+	while (in_str[++i])
 	{
 		if (in_str[i] != '%')
 			ft_putchar(in_str[i]);
@@ -32,56 +29,44 @@ int	ft_printf(const char *in_str, ...)
 		{
 			i++;
 			if (in_str[i] == 's')
-			{
-				s_str = va_arg(arg_ptr, char *);
-				ft_putstr(s_str);
-			}
+				ft_putstr(va_arg(ap, char *));
 			else if (in_str[i] == 'c')
-			{
-				c_char = va_arg(arg_ptr, int);
-				ft_putchar(c_char);
-			}
-			else if (in_str[i] == 'd' || in_str[i] == 'i')
-			{
-				s_num = va_arg(arg_ptr, int);
-				if (s_num < 0)
-				{
-					ft_putchar('-');
-					ft_putnbr_base((unsigned int)(-s_num), 10, "0123456789");
-				}
-				else
-					ft_putnbr_base(s_num, 10, "0123456789");
-			}
-			else if (in_str[i] == 'u')
-			{
-				s_num = va_arg(arg_ptr, int);
-				ft_putnbr_base((unsigned int)s_num, 10, "0123456789");
-			}
-			else if (in_str[i] == 'x')
-			{
-				u_num = va_arg(arg_ptr, unsigned int);
-				ft_putnbr_base(u_num, 16, "0123456789abcdef");
-			}
-			else if (in_str[i] == 'X')
-			{
-				u_num = va_arg(arg_ptr, unsigned int);
-				ft_putnbr_base(u_num, 16, "0123456789ABCDEF");
-			}
-			else if (in_str[i] == 'p')
-			{
-				addr = va_arg(arg_ptr, unsigned long int);
-				ft_putstr("0x");
-				ft_putnbr_base(addr, 16, "0123456789abcdef");
-			}
+				ft_putchar(va_arg(ap, int));
+			else if (in_str[i] == 'd' || in_str[i] == 'i' || in_str[i] == 'u'
+				|| in_str[i] == 'x' || in_str[i] == 'X' || in_str[i] == 'p')
+				ft_printf_num(in_str[i], ap);
 			else if (in_str[i] == '%')
 				ft_putchar('%');
-			else
-				ft_putstr("(unknown conversion)");
 		}
-		i++;
 	}
-	va_end(arg_ptr);
-//	printf("\tLength : %d", ft_char_count(0));
-//	ft_char_count(2);
+	va_end(ap);
 	return (ft_char_count(0));
+}
+
+static void	ft_printf_num(int format, va_list arg_ptr)
+{
+	int	s_num;
+
+	if (format == 'd' || format == 'i' || format == 'u')
+	{
+		s_num = va_arg(arg_ptr, int);
+		if (format == 'u')
+			ft_putnbr_base((unsigned int)s_num, 10, BASE10);
+		else if (s_num < 0)
+		{
+			ft_putchar('-');
+			ft_putnbr_base((unsigned int)(-s_num), 10, BASE10);
+		}
+		else
+			ft_putnbr_base(s_num, 10, BASE10);
+	}
+	else if (format == 'x')
+		ft_putnbr_base(va_arg(arg_ptr, unsigned int), 16, BASE16_L);
+	else if (format == 'X')
+		ft_putnbr_base(va_arg(arg_ptr, unsigned int), 16, BASE16_U);
+	else if (format == 'p')
+	{
+		ft_putstr("0x");
+		ft_putnbr_base(va_arg(arg_ptr, unsigned long int), 16, BASE16_L);
+	}
 }

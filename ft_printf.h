@@ -15,6 +15,9 @@
 
 # include <stdarg.h>
 # include <unistd.h>
+# define BASE10 "0123456789"
+# define BASE16_U "0123456789ABCDEF"
+# define BASE16_L "0123456789abcdef"
 
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
