@@ -70,13 +70,8 @@ int	ft_printf(const char *in_str, ...)
 			else if (in_str[i] == 'p')
 			{
 				addr = va_arg(arg_ptr, unsigned long int);
-				if (addr > 0)
-				{
-					ft_putstr("0x");
-					ft_putnbr_base(addr, 16, "0123456789abcdef");
-				}
-				else
-					ft_putstr("(nil)");
+				ft_putstr("0x");
+				ft_putnbr_base(addr, 16, "0123456789abcdef");
 			}
 			else if (in_str[i] == '%')
 				ft_putchar('%');
