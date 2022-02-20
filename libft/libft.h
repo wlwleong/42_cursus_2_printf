@@ -18,6 +18,6 @@
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
 void	ft_putnbr_base(unsigned long int nbr, int n_base, char *base);
-int	ft_char_count(int flag);
+int		ft_char_count(int flag);
 
 #endif
