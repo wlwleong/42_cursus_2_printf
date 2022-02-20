@@ -19,12 +19,11 @@ OBJ = $(FILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	@make -C libft
 	@cp ./libft/libft.a $(NAME)
 	gcc $(CFLAGS) -c $(FILES)
 	ar rcs $(NAME) $(OBJ)
-	ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJ) ./libft/*.o a.out
