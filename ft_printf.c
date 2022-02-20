@@ -21,6 +21,7 @@ int	ft_printf(const char *in_str, ...)
 
 	va_start(ap, in_str);
 	i = -1;
+	ft_char_count(2);
 	while (in_str[++i])
 	{
 		if (in_str[i] != '%')
