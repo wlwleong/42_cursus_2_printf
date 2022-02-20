@@ -20,8 +20,8 @@ int	ft_printf(const char *in_str, ...)
 	int		i;
 
 	va_start(ap, in_str);
-	i = -1;
 	ft_char_count(2);
+	i = -1;
 	while (in_str[++i])
 	{
 		if (in_str[i] != '%')
@@ -33,11 +33,10 @@ int	ft_printf(const char *in_str, ...)
 				ft_putstr(va_arg(ap, char *));
 			else if (in_str[i] == 'c')
 				ft_putchar(va_arg(ap, int));
-			else if (in_str[i] == 'd' || in_str[i] == 'i' || in_str[i] == 'u'
-				|| in_str[i] == 'x' || in_str[i] == 'X' || in_str[i] == 'p')
-				ft_printf_num(in_str[i], ap);
 			else if (in_str[i] == '%')
 				ft_putchar('%');
+			else
+				ft_printf_num(in_str[i], ap);
 		}
 	}
 	va_end(ap);
